@@ -16,6 +16,8 @@ namespace Mcpk
     public class Controller
     {
         private readonly float Volume = 0.35f;
+        private readonly int MinutesWaitFrom = 20;
+        private readonly int MinutesWaitTo = 40;
         private string TargetPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NETBrains", "Mcpk");
         private string ApplicationName = "Mcpk";
         private Random Rng = new Random();
@@ -80,9 +82,9 @@ namespace Mcpk
                 {
                     while (true)
                     {
-                        // Wait with song a little (20-40 minutes)
+                        // Wait with song a little (20-40 minutes by default)
                         SongIsPlaying = false;
-                        Thread.Sleep(20 * 60 * 1000 + Rng.Next(40 * 60 * 1000));
+                        Thread.Sleep(MinutesWaitFrom * 60 * 1000 + Rng.Next(MinutesWaitTo * 60 * 1000));
 
                         // Now play the song
                         SongIsPlaying = true;
